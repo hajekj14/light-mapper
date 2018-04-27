@@ -1,4 +1,4 @@
-import LigthMapper from '../src/light-mapper'
+import { LigthMapper } from '../src/light-mapper'
 
 /**
  * LigthMapper test
