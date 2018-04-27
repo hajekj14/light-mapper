@@ -2,7 +2,13 @@
   "name": "light-mapper",
   "version": "0.0.0-development",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "mapper",
+    "object mapper",
+    "light",
+    "light-mapper",
+    "typescript"
+  ],
   "main": "dist/light-mapper.umd.js",
   "module": "dist/light-mapper.es5.js",
   "typings": "dist/types/light-mapper.d.ts",
