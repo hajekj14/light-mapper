@@ -1,7 +1,7 @@
 import { LightMapperRunner } from './light-mapper-runner'
 import { MapperCallBack, IAssocAny } from './light-mapper.types'
 
-export default class LigthMapper {
+export class LigthMapper {
     public replace(prop: string, value: any): LightMapperRunner {
         const runner = new LightMapperRunner()
         runner.replace(prop, value)
