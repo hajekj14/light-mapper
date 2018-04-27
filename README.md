@@ -37,7 +37,7 @@ class Source {
     public sourceB: string = 'to target B'
 }
 
-const mapper = new LigthMapper()
+const mapper = new LightMapper()
 
 const result = mapper
     .transform('targetA', value => value + ' transformed A')
