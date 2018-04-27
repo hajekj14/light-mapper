@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import { IAssocFunction, IAssocAny, MapperCallBack } from './light-mapper.types'
 import { MappingMetadata, MappingRequirement } from './light-mapper.decorators'
-import * as _ from 'lodash'
 
 enum MAPPER_EXCEPTIONS {
     MISSING_REQUIRED_MEMBER = "Missing required property '{prop}'",
@@ -88,7 +87,7 @@ export class LightMapperRunner {
         targetProp: string,
         from: string | string[]
     ): string {
-        if (_.isArray(from)) {
+        if (from instanceof Array) {
             for (const prop of from) {
                 if (source.hasOwnProperty(prop)) {
                     return prop
