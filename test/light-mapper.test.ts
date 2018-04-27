@@ -1,10 +1,10 @@
-import { LigthMapper } from '../src/light-mapper'
+import { LightMapper } from '../src/light-mapper'
 
 /**
- * LigthMapper test
+ * LightMapper test
  */
-describe('LigthMapper test', () => {
-  it('LigthMapper is instantiable', () => {
-    expect(new LigthMapper()).toBeInstanceOf(LigthMapper)
+describe('LightMapper test', () => {
+  it('LightMapper is instantiable', () => {
+    expect(new LightMapper()).toBeInstanceOf(LightMapper)
   })
 })
