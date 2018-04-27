@@ -1,7 +1,7 @@
 import LigthMapper from '../src/light-mapper'
 
 /**
- * Dummy test
+ * LigthMapper test
  */
 describe('LigthMapper test', () => {
   it('LigthMapper is instantiable', () => {
