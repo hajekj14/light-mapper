@@ -11,6 +11,7 @@ npm install light-mapper
 ```javascript
 
 class Target {
+
     @Mapping({
         requirement: MappingRequirement.REQUIRED,
         from: ['sourceA'],
@@ -19,17 +20,22 @@ class Target {
         }
     })
     public targetA: string
+    
     @Mapping({
         requirement: MappingRequirement.REQUIRED,
         from: ['sourceB']
     })
     public targetB: string
+    
     @Mapping({
         requirement: MappingRequirement.REQUIRED,
         from: ['sourceC']
     })
     public targetC: string
-    @Mapping(MappingRequirement.REQUIRED) public targetD: string
+    
+    @Mapping(MappingRequirement.REQUIRED) 
+    public targetD: string
+    
 }
 
 class Source {
