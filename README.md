@@ -1,4 +1,4 @@
-## LightMapper [![Build Status](https://travis-ci.org/hajekj14/light-mapper.svg?branch=master)](https://travis-ci.org/hajekj14/light-mapper)
+## LightMapper
 
 typescript mapper from object to object
 
