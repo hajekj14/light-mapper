@@ -36,7 +36,7 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "semantic-release-prepare": "cross-env NPM_TOKEN=58356073-a0ed-4197-8f46-b69f0c676e01 GH_TOKEN=fd8285fee4674afbd9216eb229061bc53897bc75 ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
     "play": "nodemon -L -e ts --watch playground.ts --exec ts-node --project tsconfig.json src/playground.ts",
     "prepush": "npm run test:prod && npm run build",
@@ -83,6 +83,10 @@
     "collectCoverage": true,
     "mapCoverage": true
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
   "devDependencies": {
     "@types/jest": "^22.0.0",
     "@types/node": "^9.3.0",
@@ -107,8 +111,8 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.11.1",
-    "semantic-release": "^15.1.7",
-    "travis-deploy-once": "^4.4.1",
+    "semantic-release": "^15.12.4",
+    "travis-deploy-once": "^5.0.9",
     "ts-jest": "^22.0.0",
     "ts-node": "^6.0.0",
     "tslint": "^5.8.0",
