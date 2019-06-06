@@ -9,6 +9,7 @@ npm install light-mapper
 ### Use
 
 ```javascript
+import { Mapping, MappingRequirement, LightMapper } from "light-mapper";
 
 class Target {
 
@@ -20,22 +21,22 @@ class Target {
         }
     })
     public targetA: string
-    
+
     @Mapping({
         requirement: MappingRequirement.REQUIRED,
         from: ['sourceB']
     })
     public targetB: string
-    
+
     @Mapping({
         requirement: MappingRequirement.REQUIRED,
         from: ['sourceC']
     })
     public targetC: string
-    
-    @Mapping(MappingRequirement.REQUIRED) 
+
+    @Mapping(MappingRequirement.REQUIRED)
     public targetD: string
-    
+
 }
 
 class Source {
