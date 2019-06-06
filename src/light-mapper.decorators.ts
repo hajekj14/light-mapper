@@ -1,4 +1,4 @@
-import 'reflect-metadata'
+import 'reflect-metadata';
 
 export enum MappingRequirement {
     REQUIRED,
@@ -23,15 +23,15 @@ export function Mapping(
         let metadata = Reflect.getMetadata(
             MappingMetadata.MAPPER_PROPS_METADATA,
             target.constructor
-        )
+        );
         if (!metadata) {
-            metadata = {}
-        }
-        metadata[propertyKey] = prop
+            metadata = {};
+        };
+        metadata[propertyKey] = prop;
         Reflect.defineMetadata(
             MappingMetadata.MAPPER_PROPS_METADATA,
             metadata,
             target.constructor
-        )
+        );
     }
 }

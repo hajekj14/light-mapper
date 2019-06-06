@@ -1,6 +1,6 @@
-import 'reflect-metadata'
-import { IAssocFunction, IAssocAny, MapperCallBack } from './light-mapper.types'
-import { MappingMetadata, MappingRequirement } from './light-mapper.decorators'
+import 'reflect-metadata';
+import { IAssocFunction, IAssocAny, MapperCallBack } from './light-mapper.types';
+import { MappingMetadata, MappingRequirement } from './light-mapper.decorators';
 
 enum MAPPER_EXCEPTIONS {
     MISSING_REQUIRED_MEMBER = "Missing required property '{prop}'",
@@ -13,23 +13,23 @@ enum MappingOptsProps {
     TRANSFORMATION = 'transformation'
 }
 
-const PROP_PLACEHOLDER = '{prop}'
+const PROP_PLACEHOLDER = '{prop}';
 
 export class LightMapperRunner {
-    private transfromations: IAssocFunction = {}
-    private replacements: IAssocAny = {}
+    private transfromations: IAssocFunction = {};
+    private replacements: IAssocAny = {};
 
     public transform(
         prop: string,
         transformator: MapperCallBack
     ): LightMapperRunner {
-        this.transfromations[prop] = transformator
-        return this
+        this.transfromations[prop] = transformator;
+        return this;
     }
 
     public replace(prop: string, value: any) {
-        this.replacements[prop] = value
-        return this
+        this.replacements[prop] = value;
+        return this;
     }
 
     public map<T>(
@@ -37,19 +37,19 @@ export class LightMapperRunner {
         source: IAssocAny,
         exclude?: string[]
     ): T {
-        const obj: T = new target()
+        const obj: T = new target();
         const metadata = Reflect.getMetadata(
             MappingMetadata.MAPPER_PROPS_METADATA,
             obj.constructor
-        )
+        );
         Object.keys(metadata).forEach(prop => {
-            const propOptions = metadata[prop]
+            const propOptions = metadata[prop];
             if (exclude && this.isExcluded(exclude, prop, propOptions)) {
-                return
+                return;
             }
-            this.setProperty(prop, propOptions, source, obj)
-        })
-        return obj
+            this.setProperty(prop, propOptions, source, obj);
+        });
+        return obj;
     }
 
     private isExcluded(
@@ -67,7 +67,7 @@ export class LightMapperRunner {
                         PROP_PLACEHOLDER,
                         prop
                     )
-                )
+                );
             }
             if (propOptions === MappingRequirement.REQUIRED) {
                 throw new Error(
@@ -75,11 +75,11 @@ export class LightMapperRunner {
                         PROP_PLACEHOLDER,
                         prop
                     )
-                )
+                );
             }
-            return true
+            return true;
         }
-        return false
+        return false;
     }
 
     private getSourceProp(
@@ -90,12 +90,12 @@ export class LightMapperRunner {
         if (from instanceof Array) {
             for (const prop of from) {
                 if (source.hasOwnProperty(prop)) {
-                    return prop
+                    return prop;
                 }
             }
-            return targetProp
+            return targetProp;
         }
-        return from as string
+        return from as string;
     }
 
     private doTransformation(
@@ -104,12 +104,12 @@ export class LightMapperRunner {
         propTransformator: MapperCallBack
     ): any {
         if (propTransformator) {
-            value = propTransformator(value)
+            value = propTransformator(value);
         }
         if (this.transfromations[prop]) {
-            return this.transfromations[prop](value)
+            return this.transfromations[prop](value);
         }
-        return value
+        return value;
     }
 
     private setProperty(
@@ -122,31 +122,31 @@ export class LightMapperRunner {
             MappingOptsProps.REQUIREMENT
         )
             ? propOptions.requirement
-            : propOptions
+            : propOptions;
         const from = propOptions.hasOwnProperty(MappingOptsProps.FROM)
             ? propOptions.from
-            : undefined
+            : undefined;
         const propTransformator = propOptions.hasOwnProperty(
             MappingOptsProps.TRANSFORMATION
         )
             ? propOptions.transformation
-            : undefined
+            : undefined;
         if (this.replacements[prop]) {
-            obj[prop] = this.replacements[prop]
-            return
+            obj[prop] = this.replacements[prop];
+            return;
         }
         switch (requirement) {
             case MappingRequirement.REQUIRED: {
-                this.setRequired(obj, source, prop, from, propTransformator)
-                break
+                this.setRequired(obj, source, prop, from, propTransformator);
+                break;
             }
             case MappingRequirement.OPTIONAL: {
-                this.setOptional(obj, source, prop, from, propTransformator)
-                break
+                this.setOptional(obj, source, prop, from, propTransformator);
+                break;
             }
             case MappingRequirement.NULLABLE: {
-                this.setNullable(obj, source, prop, from, propTransformator)
-                break
+                this.setNullable(obj, source, prop, from, propTransformator);
+                break;
             }
         }
     }
@@ -160,21 +160,21 @@ export class LightMapperRunner {
     ): void {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
-            : targetProp
+            : targetProp;
         if (source.hasOwnProperty(sourceProp)) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
                 propTransformator
-            )
-            return
+            );
+            return;
         }
         throw new Error(
             MAPPER_EXCEPTIONS.MISSING_REQUIRED_MEMBER.replace(
                 PROP_PLACEHOLDER,
                 sourceProp
             )
-        )
+        );
     }
 
     private setOptional(
@@ -186,14 +186,14 @@ export class LightMapperRunner {
     ): void {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
-            : targetProp
+            : targetProp;
         if (source.hasOwnProperty(sourceProp)) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
                 propTransformator
-            )
-            return
+            );
+            return;
         }
     }
 
@@ -206,16 +206,16 @@ export class LightMapperRunner {
     ): void {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
-            : targetProp
+            : targetProp;
         if (source.hasOwnProperty(sourceProp)) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
                 propTransformator
-            )
-            return
+            );
+            return;
         } else {
-            obj[targetProp] = null
+            obj[targetProp] = null;
         }
     }
 }
