@@ -89,7 +89,7 @@ export class LightMapperRunner {
     ): string {
         if (from instanceof Array) {
             for (const prop of from) {
-                if (source.hasOwnProperty(prop)) {
+                if (source.hasOwnProperty(prop) || source[prop]) {
                     return prop;
                 }
             }
@@ -161,7 +161,7 @@ export class LightMapperRunner {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
             : targetProp;
-        if (source.hasOwnProperty(sourceProp)) {
+        if (source.hasOwnProperty(sourceProp) || source[sourceProp]) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
@@ -187,7 +187,7 @@ export class LightMapperRunner {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
             : targetProp;
-        if (source.hasOwnProperty(sourceProp)) {
+        if (source.hasOwnProperty(sourceProp) || source[sourceProp]) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
@@ -207,7 +207,7 @@ export class LightMapperRunner {
         const sourceProp = from
             ? this.getSourceProp(source, targetProp, from)
             : targetProp;
-        if (source.hasOwnProperty(sourceProp)) {
+        if (source.hasOwnProperty(sourceProp) || source[sourceProp]) {
             obj[targetProp] = this.doTransformation(
                 targetProp,
                 source[sourceProp],
